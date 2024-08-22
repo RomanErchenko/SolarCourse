@@ -9,6 +9,6 @@ namespace SolarLab.Academy.AppServices.Services
 {
     public interface IAdvertService
     {
-        Task<List<AdvertDto>> GetAll();
+        Task<List<AdvertDto>> GetAll(CancellationToken cancellationToken);
     }
 }

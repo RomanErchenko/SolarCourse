@@ -14,23 +14,32 @@ namespace SolarLab.Academy.Infrastructure
 
         public BoardDbContext(DbContextOptions<BoardDbContext> options) : base(options)
         {
+
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
 
 
-            modelBuilder.Entity<Advert>().HasData(
-       new Advert 
-       {
-           Id = new Guid("e5878c94 - 90eb - 47f5 - a52f - c1c9e65171cc"), 
-           Name = "car sale",
-           Description = " new car for sale .",
+          //  modelBuilder.Entity<Advert>().HasData(
+          //new Advert 
+          //{
+          // Id = new Guid("e5878c94-90eb-47f5-a52f-c1c9e65171cc"), 
+          // Name = "car sale",
+          // Description = " new car for sale .",
            
-       }
-   );
+          //},
 
-            base.OnModelCreating(modelBuilder);
+          //new Advert
+          //{
+          //    Id = new Guid("e5178c94-88eb-47f5-a52f-c1c9e65171cc"),
+          //    Name = "bike sale",
+          //    Description = " new bike for sale .",
+
+          //}
+          //  );
+
+           base.OnModelCreating(modelBuilder);
 
 
 

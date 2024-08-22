@@ -21,11 +21,13 @@ namespace SolarLab.Academy.Api.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAll()
+        [ProducesResponseType(typeof(IEnumerable<AdvertDto>), StatusCodes.Status200OK)]
+        public async Task<ActionResult> GetAll(CancellationToken cancellationToken)
         {
            
-            var result = await _advertService.GetAll();
-            List<AdvertInfoView> notess = _mapper.Map<List<AdvertDto>, List<AdvertInfoView>>(result);
+           var result = await _advertService.GetAll(cancellationToken);
+           
+
             return Ok(result);
         }
 

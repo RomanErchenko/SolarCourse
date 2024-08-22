@@ -19,12 +19,20 @@ namespace SolarLab.Academy.AppServices.Services
         private readonly IAdvertRepository _advertRepository;
         private readonly IMapper _mapper;
 
-        public async Task<List<AdvertDto>> GetAll()
+        public AdvertService(IAdvertRepository advertRepository, IMapper mapper)
         {
-            var advert =await _advertRepository.GetAll();
-            List<AdvertDto> notess = _mapper.Map<List<Advert>, List<AdvertDto>>(advert);
-            return notess;
+            _advertRepository = advertRepository;
+            _mapper = mapper;
+        }
 
+        public async Task<List<AdvertDto>> GetAll(CancellationToken cancellationToken)
+        {
+            List<AdvertDto> advert =await _advertRepository.GetAll(cancellationToken);
+           
+               
+
+            return advert;
+            
         }
         
 

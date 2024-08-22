@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using SolarLab.Academy.AppServices.Repository;
 using SolarLab.Academy.Contracts.Adverts;
 using SolarLab.Academy.Domain.Advert;
@@ -20,15 +21,16 @@ namespace SolarLab.Academy.DataAccess.Context.Repository
         public AdvertRepository(IRepository<Advert> repository, IMapper mapper)
         {
             _repository = repository;
-            _mapper = mapper;
+            _mapper = mapper;   
         }
 
-        public async Task<List<Advert>> GetAll()
+        public async Task<List<AdvertDto>> GetAll(CancellationToken cancellationToken)
         {
+            var advert =await _repository.GetAll().ToListAsync(cancellationToken);
+            List<AdvertDto> notess = _mapper.Map<List<Advert>, List<AdvertDto>>(advert);
 
 
-
-            return await _repository.GetAll();
+            return notess;
 
 
         }

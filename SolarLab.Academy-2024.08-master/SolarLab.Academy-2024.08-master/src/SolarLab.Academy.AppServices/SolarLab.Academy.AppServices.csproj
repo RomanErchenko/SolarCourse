@@ -15,4 +15,8 @@
     <ProjectReference Include="..\SolarLab.Academy.Domain\SolarLab.Academy.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="User\Service\" />
+  </ItemGroup>
+
 </Project>

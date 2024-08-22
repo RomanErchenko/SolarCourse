@@ -11,7 +11,6 @@ namespace SolarLab.Academy.AppServices.Repository
     public interface IAdvertRepository
     {
 
-
-        Task<List<Advert>> GetAll();
+        Task<List<AdvertDto>> GetAll(CancellationToken cancellationToken);
     }
 }

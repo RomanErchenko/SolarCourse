@@ -1,11 +1,15 @@
 using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using SolarLab.Academy.AppServices.Repository;
 using SolarLab.Academy.AppServices.Services;
 using SolarLab.Academy.AppServices.WeatherForecast.Services;
 using SolarLab.Academy.DataAccess.Context.Repository;
 using SolarLab.Academy.DataAccess.MapProfile;
+using SolarLab.Academy.Domain.Advert;
 using SolarLab.Academy.Infrastructure;
 using SolarLab.Academy.Infrastructure.Repository;
+using System;
+using System.Text.Json.Serialization;
 
 namespace SolarLab.Academy.Api
 {
@@ -21,23 +25,40 @@ namespace SolarLab.Academy.Api
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+            builder.Services.AddControllers()
+                .AddJsonOptions(options =>
+                {
+                    options.JsonSerializerOptions.PropertyNameCaseInsensitive = true;
+                    options.JsonSerializerOptions.PropertyNamingPolicy = null;
+                    options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+                });
 
 
+
+            //  var options = new DbContextOptionsBuilder<BoardDbContext>()
+            //.UseInMemoryDatabase(databaseName: "NotesDatabase")
+            // .Options;
             //builder.Services.AddTransient<IWeatherForecastService, WeatherForecastService>();
             var mapperConfiguration = new MapperConfiguration(config =>
             {
                 config.AddProfile(new AdvertProfile());
             });
             builder.Services.AddSingleton(mapperConfiguration.CreateMapper());
-            builder.Services.AddDbContext<BoardDbContext>();
+            builder.Services.AddDbContext<BoardDbContext>(options =>
+                    options.UseInMemoryDatabase("InMemoryDb"));
             builder.Services.AddTransient(typeof(IRepository<>), typeof(Repository<>));
             builder.Services.AddTransient<IAdvertRepository, AdvertRepository>();
             builder.Services.AddTransient<IAdvertService, AdvertService>();
 
-
+           
 
 
             var app = builder.Build();
+            using (var scope = app.Services.CreateScope())
+            {
+                var context = scope.ServiceProvider.GetRequiredService<BoardDbContext>();
+                SeedData(context); // ?????????? ?????? ?? ?????????
+            }
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
@@ -54,6 +75,28 @@ namespace SolarLab.Academy.Api
             app.MapControllers();
 
             app.Run();
+
+            void SeedData(BoardDbContext context)
+            {
+                if (!context.Adverts.Any())
+                {
+                    context.Adverts.AddRange(
+                        new Advert
+                        {
+                            Id = new Guid("e5878c94-90eb-47f5-a52f-c1c9e65171cc"),
+                            Name = "car sale",
+                            Description = " new car for sale .",
+                        },
+                        new Advert
+                        {
+                            Id = new Guid("e5178c94-88eb-47f5-a52f-c1c9e65171cc"),
+                            Name = "bike sale",
+                            Description = " new bike for sale .",
+                        }
+                    );
+                    context.SaveChanges();
+                }
+            }
         }
     }
 }
