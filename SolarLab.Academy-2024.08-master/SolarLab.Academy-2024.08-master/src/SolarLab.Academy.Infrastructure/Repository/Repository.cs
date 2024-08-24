@@ -25,7 +25,7 @@ namespace SolarLab.Academy.Infrastructure.Repository
             return   Entity;
         }
         /// <inheritdoc />
-        public async Task<TEntity> GetByIdAsync(int id, CancellationToken cancellationToken)
+        public async Task<TEntity> GetByIdAsync(Guid id, CancellationToken cancellationToken)
         {
             return await Entity.FindAsync(id);
         }
@@ -34,18 +34,20 @@ namespace SolarLab.Academy.Infrastructure.Repository
         public async Task AddAsync(TEntity entity, CancellationToken cancellationToken)
         {
             await Entity.AddAsync(entity);
-            await _dbContext.SaveChangesAsync();
+            await _dbContext.SaveChangesAsync(cancellationToken);
         }
 
         /// <inheritdoc />
         public async Task UpdateAsync(TEntity entity, CancellationToken cancellationToken)
         {
+           // _dbContext.Entry(entity).State = EntityState.Modified;
             Entity.Update(entity);
+
             await _dbContext.SaveChangesAsync();
         }
 
         /// <inheritdoc />
-        public async Task DeleteAsync(int id,CancellationToken cancellationToken)
+        public async Task DeleteAsync(Guid id,CancellationToken cancellationToken)
         {
             var entity = await GetByIdAsync(id,cancellationToken );
             if (entity != null)

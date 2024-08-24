@@ -23,7 +23,7 @@ namespace SolarLab.Academy.Infrastructure.Repository
      /// </summary>
      /// <param name="id"></param>
      /// <returns></returns>
-        Task<TEntity> GetByIdAsync(int id,CancellationToken cancellationToken); 
+        Task<TEntity> GetByIdAsync(Guid id,CancellationToken cancellationToken); 
         /// <summary>
         /// Добавляет сущность
         /// </summary>
@@ -40,7 +40,7 @@ namespace SolarLab.Academy.Infrastructure.Repository
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        Task DeleteAsync(int id, CancellationToken cancellationToken); 
+        Task DeleteAsync(Guid id, CancellationToken cancellationToken); 
         /// <summary>
         /// Получение по фильтру
         /// </summary>

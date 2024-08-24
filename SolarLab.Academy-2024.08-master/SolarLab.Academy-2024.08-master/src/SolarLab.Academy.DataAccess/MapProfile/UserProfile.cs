@@ -12,18 +12,18 @@ using System.Threading.Tasks;
 
 namespace SolarLab.Academy.DataAccess.MapProfile
 {
-    public class AdvertProfile:Profile
+    public class UserProfile:Profile
     {
-
-        public AdvertProfile()
+        public UserProfile()
         {
-          CreateMap<Advert,AdvertDto>().ReverseMap();
-          CreateMap<AdvertDto, AdvertInfoView>().ReverseMap();
-             CreateMap<Order, OrderDto>();
+           // CreateMap<Order, OrderDto>();
             CreateMap<User, UserDto>().ReverseMap();
-            CreateMap<User, UserUpdate>().ReverseMap();
             CreateMap<User, UserShortDto>();
+                 
         }
+
+
+
 
     }
 }

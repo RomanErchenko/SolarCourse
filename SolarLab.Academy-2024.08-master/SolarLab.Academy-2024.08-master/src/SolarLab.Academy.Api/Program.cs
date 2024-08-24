@@ -2,10 +2,13 @@ using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using SolarLab.Academy.AppServices.Repository;
 using SolarLab.Academy.AppServices.Services;
+using SolarLab.Academy.AppServices.User.Repository;
+using SolarLab.Academy.AppServices.User.Service;
 using SolarLab.Academy.AppServices.WeatherForecast.Services;
 using SolarLab.Academy.DataAccess.Context.Repository;
 using SolarLab.Academy.DataAccess.MapProfile;
 using SolarLab.Academy.Domain.Advert;
+using SolarLab.Academy.Domain.Userss;
 using SolarLab.Academy.Infrastructure;
 using SolarLab.Academy.Infrastructure.Repository;
 using System;
@@ -49,8 +52,10 @@ namespace SolarLab.Academy.Api
             builder.Services.AddTransient(typeof(IRepository<>), typeof(Repository<>));
             builder.Services.AddTransient<IAdvertRepository, AdvertRepository>();
             builder.Services.AddTransient<IAdvertService, AdvertService>();
+            builder.Services.AddTransient<IUserRepository, UserRepository>();
+            builder.Services.AddTransient<IUserService, UserService>();
 
-           
+
 
 
             var app = builder.Build();
@@ -92,6 +97,28 @@ namespace SolarLab.Academy.Api
                             Id = new Guid("e5178c94-88eb-47f5-a52f-c1c9e65171cc"),
                             Name = "bike sale",
                             Description = " new bike for sale .",
+                        }
+                    );
+                    context.SaveChanges();
+                }
+                if (!context.Users.Any())
+                {
+                    context.Users.AddRange(
+                        new User
+                        {
+                            Id = new Guid("e4444c94-90eb-47f5-a52f-c1c9e65171cc"),
+                            Name = "Ivan",
+                            Surname = " Ivanov",
+                            Login="login",
+                            Password="password"
+                        },
+                        new User
+                        {
+                            Id = new Guid("e5555c94-77eb-47f5-a52f-c1c9e65171cc"),
+                            Name = "Dmitri",
+                            Surname = "Dmitrov",
+                            Login = "login1",
+                            Password = "password1"
                         }
                     );
                     context.SaveChanges();

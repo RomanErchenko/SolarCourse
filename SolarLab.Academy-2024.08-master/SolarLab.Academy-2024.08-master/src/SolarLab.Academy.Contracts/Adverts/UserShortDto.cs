@@ -7,13 +7,11 @@ using System.Threading.Tasks;
 
 namespace SolarLab.Academy.Contracts.Adverts
 {
-    public class UserDto
+    public class UserShortDto
     {
         public Guid Id { get; set; }
         public string Name { get; set; } = string.Empty;
-        public string Surname { get; set; } = string.Empty;
-        public string Login { get; set; } = string.Empty;
-        public string Password { get; set; } = string.Empty;
-        public List<OrderDto>? Order { get; set; } = new();
+       // public List<OrderDto>? Order { get; set; } = new();
+
     }
 }
