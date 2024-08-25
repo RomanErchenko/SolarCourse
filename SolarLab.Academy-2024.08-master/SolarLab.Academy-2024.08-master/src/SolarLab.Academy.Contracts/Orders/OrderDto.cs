@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace SolarLab.Academy.Contracts.Orders
@@ -13,6 +14,7 @@ namespace SolarLab.Academy.Contracts.Orders
         public string Info { get; set; } = string.Empty;
         public DateTime Date { get; set; }
         public Guid UserId { get; set; }
+        [JsonIgnore]
         public UserDto User { get; set; } = new();
     }
 }

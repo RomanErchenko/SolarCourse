@@ -19,7 +19,7 @@ namespace SolarLab.Academy.DataAccess.MapProfile
         {
           CreateMap<Advert,AdvertDto>().ReverseMap();
           CreateMap<AdvertDto, AdvertInfoView>().ReverseMap();
-             CreateMap<Order, OrderDto>();
+             CreateMap<Order, OrderDto>().ReverseMap();
             CreateMap<User, UserDto>().ReverseMap();
             CreateMap<User, UserUpdate>().ReverseMap();
             CreateMap<User, UserShortDto>();

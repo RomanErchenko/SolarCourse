@@ -1,5 +1,7 @@
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
+using SolarLab.Academy.AppServices.Order.Repository;
+using SolarLab.Academy.AppServices.Order.Service;
 using SolarLab.Academy.AppServices.Repository;
 using SolarLab.Academy.AppServices.Services;
 using SolarLab.Academy.AppServices.User.Repository;
@@ -54,6 +56,8 @@ namespace SolarLab.Academy.Api
             builder.Services.AddTransient<IAdvertService, AdvertService>();
             builder.Services.AddTransient<IUserRepository, UserRepository>();
             builder.Services.AddTransient<IUserService, UserService>();
+            builder.Services.AddTransient<IOrderRepository, OrderRepository>();
+            builder.Services.AddTransient<IOrderService, OrderService>();
 
 
 
